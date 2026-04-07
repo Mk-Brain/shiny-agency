@@ -10,6 +10,7 @@ import Freelance from "./pages/Freelances";
 
 
 
+
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 
@@ -19,7 +20,8 @@ ReactDOM.createRoot(rootElement).render(
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/Survey/:questionnumber" element={<Survey/>}/>
+        <Route path="/Survey/:questionNumber" element={<Survey/>}>
+        </Route>
         <Route path="/Results" element={<Results/>}/>
         <Route path="/Freelance" element={<Freelance/>}/>
         <Route path="*" element={<ErrorPage/>}/>
