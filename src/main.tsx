@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './pages/Home/';
 import Survey from "./pages/Survey";
 import Header from "./components/Header";
-import ClientForm from "./components/ClientForm";
-import FreelanceFrom from "./components/FreelanceForm";
+
 
 
 const rootElement = document.getElementById("root");
@@ -17,10 +16,7 @@ ReactDOM.createRoot(rootElement).render(
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/Survey" element={<Survey/>}>
-          <Route path="Client" element={<ClientForm/>}/>
-          <Route path="Freelance" element={<FreelanceFrom/>}/>
-        </Route>
+        <Route path="/Survey" element={<Survey/>}/>
       </Routes>
     </Router>
   </React.StrictMode>
