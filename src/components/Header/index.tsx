@@ -4,7 +4,8 @@ const Header = ()=>{
     return(
         <nav>
             <Link to={'/'}>Acceuil</Link>
-            <Link to={'/Survey'}>Questionnaire</Link>
+            <Link to={'/Survey/42'}>Questionnaire</Link>
+            <Link to={'/Freelance'}>Prestataires Freelance</Link>
         </nav>
     )
 }

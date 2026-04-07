@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './pages/Home/';
 import Survey from "./pages/Survey";
 import Header from "./components/Header";
+import ErrorPage from "./components/ErrorPage";
+import Results from "./pages/Results";
+import Freelance from "./pages/Freelances";
 
 
 
@@ -16,7 +19,10 @@ ReactDOM.createRoot(rootElement).render(
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/Survey" element={<Survey/>}/>
+        <Route path="/Survey/:questionnumber" element={<Survey/>}/>
+        <Route path="/Results" element={<Results/>}/>
+        <Route path="/Freelance" element={<Freelance/>}/>
+        <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </Router>
   </React.StrictMode>
