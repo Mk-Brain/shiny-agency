@@ -1,24 +1,8 @@
 import styled from 'styled-components'
-import Profile from '../../assets/profile.png'
 import Card from '../../components/Card'
+import { useEffect, useState } from 'react'
+import { Loader } from '../../utils/Atoms'
 
-const freelanceProfiles = [
-    {
-        name: 'John Doe',
-        jobTitle: 'Devops',
-        picture: Profile
-    },
-    {
-        name: 'Jane Doe',
-        jobTitle: 'admin  System',
-        picture: Profile
-    },
-    {
-        name: 'D.Doe',
-        jobTitle: 'developpeur Frontend',
-        picture: Profile
-    },
-]
 
 const GlobalContainer = styled.div`
     justify-items: center;
@@ -34,8 +18,34 @@ const CardsContainer = styled.div`
     grid-template-rows: auto;
     grid-template-columns: repeat(2, 1fr);
 `
+type freelance = {
+    id: string,
+    name: string,
+    job: string,
+    picture: string
+}
 
 const Freelance = ()=>{
+    const [freelanceData, setFreelanceData] = useState<freelance[]>([])
+    const [isDataLoading, setDataLoading] = useState(false)
+    const [error, setError] = useState<boolean | null>(null)
+
+    useEffect(()=>{
+        async function fetchFreelance() {
+        setDataLoading(true)
+        try {
+            const response = await fetch('http://localhost:8000/freelances')
+            const {freelancersList} = await response.json()
+            setFreelanceData(freelancersList)
+        } catch (err) {
+            console.log(err)
+            setError(true)
+        }finally{
+            setDataLoading(false)
+        }
+        }
+        fetchFreelance()
+    }, [])
     return(
         <GlobalContainer>
             <h2>Trouvez vos prestataire</h2>
@@ -46,10 +56,12 @@ const Freelance = ()=>{
                 }}>Chez Shiny agency, nous réunissons les meilleurs profils</p>
             <CardsContainer>
             {
-                freelanceProfiles.map((freelance, index)=>(
-                    <Card key={`${index}-${freelance.name}`}
+                isDataLoading ? <Loader/> : 
+                error ? <h2>Oups 🤦‍♂️😒! Probleme de connexion à l'API; actualisez la page</h2> :
+                freelanceData.map((freelance)=>(
+                    <Card key={`${freelance.id}-${freelance.name}`}
                     title={freelance.name}
-                    label={freelance.jobTitle}
+                    label={freelance.job}
                     picture={freelance.picture}/>
                 ))
             }
