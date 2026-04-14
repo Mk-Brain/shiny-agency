@@ -73,7 +73,9 @@ function Survey() {
     return (
         <SurveyContainer>
       <QuestionTitle>Question {questionNumber}</QuestionTitle>
-      {isDataLoading ? <Loader/> : error ? <QuestionContent>Oups 🤦‍♂️😒! Probleme de connexion à l'API; actualisez la page</QuestionContent> : <QuestionContent>{surveyData[questionNumber]}</QuestionContent>}
+      {isDataLoading ? <Loader/> : error ? 
+      <QuestionContent>Oups 🤦‍♂️😒! Probleme de connexion à l'API; actualisez la page</QuestionContent> : 
+      <QuestionContent>{surveyData[questionNumber]}</QuestionContent>}
       <LinkWrapper>
             <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
         {questionNumberInt === 10 ? (
