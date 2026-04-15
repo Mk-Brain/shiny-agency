@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react'
 
- 
+ type donnee = {
+    surveyData? : object,
+    resultsData? : {
+        title: string,
+        description: string
+    }[]
+ }
 
 export function useFetch(url : string) {
-    const [data, setData] = useState({surveyData: {}});
+    const [data, setData] = useState<donnee>({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<boolean | null>(null)
 
@@ -18,8 +24,8 @@ export function useFetch(url : string) {
         async function fetchData() {
             try {
                 const response = await fetch(url)
-            const data = await response.json()
-            setData(data)
+                const data = await response.json()
+                setData(data)
             } catch (error) {
                 console.log(error);
                 setError(true)

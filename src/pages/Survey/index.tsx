@@ -74,7 +74,7 @@ function Survey() {
 
   const { data, loading, error } = useFetch(`http://localhost:8000/survey`)
 
-  const  {surveyData}  = data  
+  const  {surveyData} = data 
 
 
 //console.log({ questionNumber: answers })
