@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {ThemeContext} from './context'
+import {SurveyContext, ThemeContext} from './context'
 
-export const ThemeProvider = ({chidren} : {chidren : React.ReactNode}) =>{
+export const ThemeProvider = ({children} : {children : React.ReactNode}) =>{
     const [theme, setTheme] = useState('light')
     const toggleTheme = () =>{
         setTheme(theme === 'light' ? 'dark' : 'light')
@@ -9,7 +9,25 @@ export const ThemeProvider = ({chidren} : {chidren : React.ReactNode}) =>{
 
     return(
         <ThemeContext.Provider value={{theme, toggleTheme}}>
-            {chidren}
+            {children}
         </ThemeContext.Provider>
     )
+}
+
+
+
+
+export const SurveyProvider = ({ children } : { children : React.ReactNode }) => {
+  const [answers, setAnswers] = useState({})
+  const saveAnswers = (newAnswers : {newAnswers: object}) => {
+    console.log(newAnswers);
+    setAnswers({ ...answers, ...newAnswers })
+  }
+
+  return (
+    <SurveyContext.Provider 
+        value={{ answers, saveAnswers }}>
+      {children}
+    </SurveyContext.Provider>
+  )
 }
