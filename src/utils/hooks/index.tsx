@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react'
 
+    type freelance = {
+    id: string,
+    name: string,
+    job: string,
+    picture: string
+}
+
  type donnee = {
     surveyData? : object,
     resultsData? : {
         title: string,
         description: string
-    }[]
+    }[],
+    freelancersList : freelance[]
  }
 
 export function useFetch(url : string) {

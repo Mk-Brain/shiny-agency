@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Card from '../../components/Card'
-import { useEffect, useState } from 'react'
 import { Loader } from '../../utils/Atoms'
+import { useFetch } from '../../utils/hooks'
 
 
 const GlobalContainer = styled.div`
@@ -18,34 +18,15 @@ const CardsContainer = styled.div`
     grid-template-rows: auto;
     grid-template-columns: repeat(2, 1fr);
 `
-type freelance = {
-    id: string,
-    name: string,
-    job: string,
-    picture: string
-}
+
 
 const Freelance = ()=>{
-    const [freelanceData, setFreelanceData] = useState<freelance[]>([])
-    const [isDataLoading, setDataLoading] = useState(false)
-    const [error, setError] = useState<boolean | null>(null)
+    
+    
 
-    useEffect(()=>{
-        async function fetchFreelance() {
-        setDataLoading(true)
-        try {
-            const response = await fetch('http://localhost:8000/freelances')
-            const {freelancersList} = await response.json()
-            setFreelanceData(freelancersList)
-        } catch (err) {
-            console.log(err)
-            setError(true)
-        }finally{
-            setDataLoading(false)
-        }
-        }
-        fetchFreelance()
-    }, [])
+    const {data, loading, error} = useFetch('http://localhost:8000/freelances')
+    console.log(data)
+    const {freelancersList} = data
     return(
         <GlobalContainer>
             <h2>Trouvez vos prestataire</h2>
@@ -56,9 +37,9 @@ const Freelance = ()=>{
                 }}>Chez Shiny agency, nous réunissons les meilleurs profils</p>
             <CardsContainer>
             {
-                isDataLoading ? <Loader/> : 
+                loading ? <Loader/> : 
                 error ? <h2>Oups 🤦‍♂️😒! Probleme de connexion à l'API; actualisez la page</h2> :
-                freelanceData.map((freelance)=>(
+                freelancersList.map((freelance)=>(
                     <Card key={`${freelance.id}-${freelance.name}`}
                     title={freelance.name}
                     label={freelance.job}
