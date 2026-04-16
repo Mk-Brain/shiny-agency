@@ -13,7 +13,7 @@ type questionAnswers = {
  export const ThemeContext = createContext<themeElement>(
     {
         theme : 'ligth', 
-        toggleTheme: ()=>undefined
+        toggleTheme: ()=>{}
     }
 )
 

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { ThemeContext } from '../../utils/contex/context'
 
     type freelance = {
     id: string,
@@ -7,17 +8,19 @@ import { useState, useEffect } from 'react'
     picture: string
 }
 
- type donnee = {
-    surveyData? : object,
-    resultsData? : {
+type resut = {
         title: string,
         description: string
-    }[],
-    freelancersList : freelance[]
+    }
+
+ type donnee = {
+    surveyData? : object,
+    resultsData? : resut[],
+    freelancersList : freelance[],
  }
 
 export function useFetch(url : string) {
-    const [data, setData] = useState<donnee>({});
+    const [data, setData] = useState<donnee >({surveyData : {}, resultsData : [], freelancersList : []});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<boolean | null>(null)
 
@@ -55,4 +58,12 @@ export function useFetch(url : string) {
     
 
     return { data, loading, error };
+}
+
+
+export function useTheme(){
+    
+    const { theme } = useContext(ThemeContext)
+
+    return {theme}
 }
