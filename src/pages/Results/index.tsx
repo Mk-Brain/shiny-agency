@@ -6,6 +6,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 import colors from "../../utils/styles/colors"
 import { useTheme } from "../../utils/hooks"
+import EmptyList from "../../components/EmptyList"
 
 const ResultsContainer = styled.div`
   display: flex;
@@ -78,8 +79,8 @@ function formQueryParams(answers : object){
 
 const Results = ()=>{
     const {theme} = useTheme()
-    const {answers} = useContext(SurveyContext)
-    //console.log(answers);
+    const {answers }  = useContext(SurveyContext)
+    console.log(answers);
     const queryParams = formQueryParams(answers)
     const {data, loading, error} = useFetch(`http://localhost:8000/results/?${queryParams}`)
 
@@ -96,7 +97,9 @@ const Results = ()=>{
     </LoaderWrapper>
   ) : (
     <ResultsContainer theme={theme}>
-      <ResultsTitle theme={theme}>
+      {
+        resultsData?.length !== 0 ? 
+        <ResultsTitle theme={theme}>
         Les compétences dont vous avez besoin :
         {resultsData &&
           resultsData.map((result, index) => (
@@ -108,7 +111,10 @@ const Results = ()=>{
               {index === resultsData.length - 1 ? '' : ','}
             </JobTitle>
           ))}
-      </ResultsTitle>
+      </ResultsTitle> :
+      <EmptyList theme={theme}/>
+      }
+      
       <StyledLink isFullLink to="/freelances">
         Découvrez nos profils
       </StyledLink>

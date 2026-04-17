@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import colors from "../../utils/styles/colors"
-import errorImage from "../../assets/dark-logo.png"
+import errorImage from "../../assets/error.svg"
 const ErrorComponent = styled.div`
   display: flex;
   flex-direction: column;

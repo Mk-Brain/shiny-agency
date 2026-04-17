@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Card from '../../components/Card'
+import Card from '../../components/Card/classversion'
 import { Loader } from '../../utils/Atoms'
 import { useFetch } from '../../utils/hooks'
 
@@ -7,8 +7,8 @@ import { useFetch } from '../../utils/hooks'
 const GlobalContainer = styled.div`
     justify-items: center;
     text-align: center;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
 `
 
 const CardsContainer = styled.div`
