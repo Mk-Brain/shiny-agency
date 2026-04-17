@@ -10,6 +10,7 @@ import Freelance from "./pages/Freelances";
 import {ThemeProvider, SurveyProvider} from "./utils/contex/Provider";
 import GlobalStyle from "./utils/styles/GlobalStyles";
 import Footer from "./components/Footer";
+import ProfileContainer from "./pages/Profile";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
@@ -27,6 +28,7 @@ ReactDOM.createRoot(rootElement).render(
             <Route path="/Survey/:questionNumber" element={<Survey/>}/>
             <Route path="/Results" element={<Results/>}/>
             <Route path="/Freelances" element={<Freelance/>}/>
+            <Route path="/profile/:id" element={<ProfileContainer />} />
             <Route path="*" element={<ErrorPage/>}/>
         </Routes>
         }/>

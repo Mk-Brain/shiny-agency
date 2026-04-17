@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Card from '../../components/Card/classversion'
 import { Loader } from '../../utils/Atoms'
 import { useFetch } from '../../utils/hooks'
+import { Link } from 'react-router-dom'
 
 
 const GlobalContainer = styled.div`
@@ -22,8 +23,6 @@ const CardsContainer = styled.div`
 
 const Freelance = ()=>{
     
-    
-
     const {data, loading, error} = useFetch('http://localhost:8000/freelances')
     console.log(data)
     const {freelancersList} = data
@@ -40,10 +39,12 @@ const Freelance = ()=>{
                 loading ? <Loader/> : 
                 error ? <h2>Oups 🤦‍♂️😒! Probleme de connexion à l'API; actualisez la page</h2> :
                 freelancersList.map((freelance)=>(
-                    <Card key={`${freelance.id}-${freelance.name}`}
-                    title={freelance.name}
-                    label={freelance.job}
-                    picture={freelance.picture}/>
+                    <Link key={`freelance-${freelance.id}`} to={`/profile/${freelance.id}`}>
+                        <Card key={`${freelance.id}-${freelance.name}`}
+                        title={freelance.name}
+                        label={freelance.job}
+                        picture={freelance.picture}/>
+                    </Link>
                 ))
             }
             </CardsContainer>
